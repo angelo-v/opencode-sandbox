@@ -1,0 +1,1 @@
+docker run -it --cap-drop=ALL --network=bridge -v $(pwd):/workspace:rw -v ~/.opencode:/home/node/.opencode:ro -v ~/.config/opencode:/home/node/.config/opencode:ro -v ~/.local/share/opencode:/home/node/.local/share/opencode:rw -v ~/.cache/opencode/:/home/node/.cache/opencode/:rw -v ~/.local/state/opencode/:/home/node/.local/state/opencode/:rw -w /workspace opencode-sandbox

@@ -43,16 +43,50 @@ make run
 ### Using Docker Directly
 
 ```bash
-docker run -it \
-  --cap-drop=ALL \
-  --network=bridge \
-  -v $(pwd):/workspace:rw \
-  -v ~/.opencode:/home/node/.opencode:ro \
-  -v ~/.config/opencode:/home/node/.config/opencode:ro \
-  -v ~/.local/share/opencode:/home/node/.local/share/opencode:rw \
-  -v ~/.cache/opencode/:/home/node/.cache/opencode/:rw \
-  -v ~/.local/state/opencode/:/home/node/.local/state/opencode/:rw \
-  -w /workspace opencode-sandbox
+bash docker-run.sh
+```
+
+## Installation as Shell Alias
+
+For easy access from anywhere on your system, install the sandbox as a shell alias:
+
+### Quick Install
+
+1. **Build the image:**
+   ```bash
+   make build
+   ```
+
+2. **Install the alias** (choose your shell):
+   ```bash
+   # For bash
+   make install-bash
+   
+   # For zsh
+   make install-zsh
+   ```
+
+3. **Reload your shell:**
+   ```bash
+   source ~/.bashrc  # or source ~/.zshrc
+   ```
+
+4. **Use it from anywhere:**
+   ```bash
+   cd ~/my-project
+   opencode-sandbox
+   ```
+
+### Uninstall
+
+To remove the alias:
+```bash
+make uninstall-bash  # or make uninstall-zsh
+```
+
+To remove the Docker image:
+```bash
+docker rmi opencode-sandbox
 ```
 
 ## Volume Mounts Explained
