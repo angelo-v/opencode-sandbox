@@ -6,12 +6,14 @@ RUN apt-get update && apt-get install -y \
     curl \
     jq \
     && rm -rf /var/lib/apt/lists/* \
-    && apt-get clean
-
-RUN npm install -g opencode-ai \
+    && apt-get clean \
+    && npm install -g opencode-ai \
     && npm cache clean --force
 
 USER node
+
+RUN mkdir -p ~/.config ~/.local ~/.cache
+
 WORKDIR /workspace
 
 ENTRYPOINT ["dumb-init", "--"]
