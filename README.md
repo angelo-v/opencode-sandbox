@@ -13,6 +13,7 @@ A containerized sandbox environment for running OpenCode AI in an isolated Docke
 This sandbox provides:
 - **Node.js LTS** (slim variant)
 - **OpenCode AI** (globally installed via npm)
+- **Playwright CLI** with Chrome browser (configured for Docker with --no-sandbox)
 - **Git** for version control
 - **curl** for HTTP requests
 - **jq** for JSON processing
