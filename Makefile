@@ -6,12 +6,14 @@ run:
 
 install-bash:
 	@echo "Installing opencode-sandbox alias for bash..."
+	@sed -i.bak '/alias opencode-sandbox=/d' ~/.bashrc
 	@echo "alias opencode-sandbox='$$(cat docker-run.sh)'" >> ~/.bashrc
 	@echo "✓ Alias added to ~/.bashrc"
 	@echo "Run: source ~/.bashrc (or restart your terminal)"
 
 install-zsh:
 	@echo "Installing opencode-sandbox alias for zsh..."
+	@sed -i.bak '/alias opencode-sandbox=/d' ~/.zshrc
 	@echo "alias opencode-sandbox='$$(cat docker-run.sh)'" >> ~/.zshrc
 	@echo "✓ Alias added to ~/.zshrc"
 	@echo "Run: source ~/.zshrc (or restart your terminal)"

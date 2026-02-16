@@ -35,30 +35,45 @@ docker build -t opencode-sandbox .
 
 ## Running the Sandbox
 
-### Using Make (Recommended)
+### Using Pre-built Image (Recommended)
+
+The easiest way to get started is using the pre-built image from GitHub Container Registry, which is automatically rebuilt daily with the latest updates:
+
+```bash
+bash docker-run.sh
+```
+
+This will automatically pull the latest image from `ghcr.io/angelo-v/opencode-sandbox:latest` and run it.
+
+**Note:** The image is rebuilt daily at 2 AM UTC with all packages updated (Node.js, OpenCode, Playwright, Chrome, system packages).
+
+### Using Make
 
 ```bash
 make run
 ```
 
-### Using Docker Directly
+### Building and Running Locally
+
+If you want to build the image locally instead of using the pre-built one:
 
 ```bash
-bash docker-run.sh
+# Build the image
+make build
+
+# Run the locally built image (edit docker-run.sh to use 'opencode-sandbox' instead of the ghcr.io image)
+make run
 ```
 
 ## Installation as Shell Alias
 
 For easy access from anywhere on your system, install the sandbox as a shell alias:
 
-### Quick Install
+### Quick Install (Using Pre-built Image)
 
-1. **Build the image:**
-   ```bash
-   make build
-   ```
+**No need to build!** Just install the alias and start using:
 
-2. **Install the alias** (choose your shell):
+1. **Install the alias** (choose your shell):
    ```bash
    # For bash
    make install-bash
@@ -67,12 +82,45 @@ For easy access from anywhere on your system, install the sandbox as a shell ali
    make install-zsh
    ```
 
-3. **Reload your shell:**
+2. **Reload your shell:**
    ```bash
    source ~/.bashrc  # or source ~/.zshrc
    ```
 
-4. **Use it from anywhere:**
+3. **Use it from anywhere:**
+   ```bash
+   cd ~/my-project
+   opencode-sandbox
+   ```
+
+The alias will automatically pull the latest daily-built image from GitHub Container Registry on first run.
+
+### Install with Local Build
+
+If you prefer to build and use a local image:
+
+1. **Build the image:**
+   ```bash
+   make build
+   ```
+
+2. **Edit `docker-run.sh`** to use `opencode-sandbox` instead of the ghcr.io image
+
+3. **Install the alias** (choose your shell):
+   ```bash
+   # For bash
+   make install-bash
+   
+   # For zsh
+   make install-zsh
+   ```
+
+4. **Reload your shell:**
+   ```bash
+   source ~/.bashrc  # or source ~/.zshrc
+   ```
+
+5. **Use it from anywhere:**
    ```bash
    cd ~/my-project
    opencode-sandbox
