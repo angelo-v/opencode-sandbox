@@ -9,9 +9,10 @@ docker pull "${IMAGE}"
 echo "Starting OpenCode container..."
 docker run -it \
   --cap-drop=ALL \
-  --network=bridge \
+  --network=host \
   -v $(pwd):/workspace:rw \
   -v ~/.opencode:/home/node/.opencode:ro \
+  -v ~/.wallaby:/home/node/.wallaby:ro \
   -v ~/.config/opencode:/home/node/.config/opencode:ro \
   -v ~/.local/share/opencode:/home/node/.local/share/opencode:rw \
   -v ~/.cache/opencode/:/home/node/.cache/opencode/:rw \
