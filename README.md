@@ -205,3 +205,84 @@ RUN apt-get update && apt-get install -y \
 ```
 
 Then rebuild with `make build` or `docker build -t opencode-sandbox .`
+
+---
+
+## pi-coding-agent Sandbox
+
+This repository also includes a sandbox for the **pi-coding-agent**.
+
+### What's Included
+
+- **Node.js LTS** (slim variant)
+- **pi-coding-agent** (`@earendil-works/pi-coding-agent`, globally installed via npm)
+- **Git**, **curl**, **jq**, **dumb-init**
+
+### Building the pi Sandbox
+
+```bash
+make build-pi
+```
+
+or directly:
+
+```bash
+docker build -f Dockerfile.pi -t ghcr.io/angelo-v/pi-sandbox:latest .
+```
+
+### Running the pi Sandbox
+
+#### Using Pre-built Image (Recommended)
+
+```bash
+bash pi-run.sh
+```
+
+This will automatically pull the latest image from `ghcr.io/angelo-v/pi-sandbox:latest`.
+
+#### Using Make
+
+```bash
+make run-pi
+```
+
+### Installation as Shell Alias
+
+```bash
+# For bash
+make install-pi-bash
+
+# For zsh
+make install-pi-zsh
+```
+
+Reload your shell:
+
+```bash
+source ~/.bashrc  # or source ~/.zshrc
+```
+
+Then use it from anywhere:
+
+```bash
+cd ~/my-project
+pi-sandbox
+```
+
+#### Uninstall
+
+```bash
+make uninstall-pi-bash  # or make uninstall-pi-zsh
+```
+
+### Volume Mounts (pi Sandbox)
+
+| Host Path | Container Path | Mode | Purpose |
+|-----------|---------------|------|---------|
+| `$(pwd)` | `/workspace` | rw | Working directory for your projects |
+| `~/.pi` | `/home/node/.pi` | rw | pi configuration and data |
+| `~/.agents` | `/home/node/.agents` | ro | Agent configuration (read-only) |
+
+### Networking
+
+The pi sandbox uses `--network=host` instead of bridge networking (unlike the OpenCode sandbox), allowing direct host network access.
