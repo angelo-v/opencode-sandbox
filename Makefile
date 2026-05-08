@@ -68,6 +68,17 @@ uninstall-pi-zsh:
 	@sed -i.bak '/# BEGIN pi-sandbox/,/# END pi-sandbox/d' ~/.zshrc
 	@echo "✓ Alias removed from ~/.zshrc (backup: ~/.zshrc.bak)"
 
+secrets-pi:
+	@echo "Starte pi-secrets-shell — 'pass insert <name>' zum Hinzufügen von Secrets..."
+	@docker run -it --rm \
+	  --cap-drop=ALL \
+	  --network=host \
+	  -v $(HOME)/.pi:/home/node/.pi:rw \
+	  -e GNUPGHOME=/home/node/.pi/gnupg \
+	  -e PASSWORD_STORE_DIR=/home/node/.pi/secrets \
+	  ghcr.io/angelo-v/pi-sandbox:latest \
+	  bash
+
 .PHONY: run build install-bash install-zsh uninstall-bash uninstall-zsh \
-        build-pi run-pi install-pi-bash install-pi-zsh uninstall-pi-bash uninstall-pi-zsh
+        build-pi run-pi secrets-pi install-pi-bash install-pi-zsh uninstall-pi-bash uninstall-pi-zsh
 

@@ -5,15 +5,20 @@ RUN apt-get update && apt-get install -y \
     git \
     curl \
     jq \
+    gnupg \
+    pass \
+    tree \
     && rm -rf /var/lib/apt/lists/* \
     && apt-get clean \
     && npm install -g @earendil-works/pi-coding-agent
 
+COPY --chmod=755 entrypoint.pi.sh /usr/local/bin/entrypoint.pi.sh
+
 USER node
 
-RUN mkdir -p ~/.config ~/.local ~/.cache
+RUN mkdir -p ~/.config ~/.local ~/.cache ~/.pi
 
 WORKDIR /workspace
 
-ENTRYPOINT ["dumb-init", "--"]
+ENTRYPOINT ["dumb-init", "--", "/usr/local/bin/entrypoint.pi.sh"]
 CMD ["pi"]

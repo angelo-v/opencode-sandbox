@@ -13,5 +13,7 @@ docker run -it \
   -v $(pwd):/workspace:rw \
   -v ~/.pi:/home/node/.pi:rw \
   -v ~/.agents:/home/node/.agents:ro \
+  -e GNUPGHOME=/home/node/.pi/gnupg \
+  -e PASSWORD_STORE_DIR=/home/node/.pi/secrets \
   -w /workspace \
   "${IMAGE}"
