@@ -12,6 +12,7 @@ docker run -it \
   --network=host \
   -v $(pwd):/workspace:rw \
   -v ~/.pi:/home/node/.pi:rw \
+  -v ~/.wallaby:/home/node/.wallaby:ro \
   -v ~/.agents:/home/node/.agents:ro \
   -e GNUPGHOME=/home/node/.pi/gnupg \
   -e PASSWORD_STORE_DIR=/home/node/.pi/secrets \
