@@ -33,7 +33,7 @@ RUN pipx install uv
 
 RUN mkdir -p ~/.config ~/.local ~/.cache ~/.pi
 
-WORKDIR /workspace
+WORKDIR /workdir
 
 ENTRYPOINT ["dumb-init", "--", "/usr/local/bin/entrypoint.pi.sh"]
 CMD ["pi"]
