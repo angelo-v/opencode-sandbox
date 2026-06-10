@@ -1,5 +1,13 @@
 FROM node:lts-slim
 
+# Install Temurin (Eclipse) JDK 21 LTS repo
+RUN apt-get update && apt-get install -y wget apt-transport-https gpg \
+    && wget -qO - https://packages.adoptium.net/artifactory/api/gpg/key/public \
+       | gpg --dearmor -o /etc/apt/keyrings/adoptium.gpg \
+    && echo "deb [signed-by=/etc/apt/keyrings/adoptium.gpg] https://packages.adoptium.net/artifactory/deb $(. /etc/os-release && echo $VERSION_CODENAME) main" \
+       > /etc/apt/sources.list.d/adoptium.list \
+    && rm -rf /var/lib/apt/lists/*
+
 RUN apt-get update && apt-get install -y \
     dumb-init \
     git \
@@ -12,6 +20,7 @@ RUN apt-get update && apt-get install -y \
     python3-pip \
     python3-venv \
     pipx \
+    temurin-25-jdk \
     && rm -rf /var/lib/apt/lists/* \
     && apt-get clean \
     && npm install -g @earendil-works/pi-coding-agent
