@@ -11,7 +11,7 @@ chmod 700 "$GNUPGHOME"
 
 # GPG-Schlüssel erzeugen falls noch keiner vorhanden
 if ! gpg --list-secret-keys pi@local &>/dev/null; then
-    echo "[pi] Kein GPG-Schlüssel gefunden — erzeuge neuen Ed25519-Schlüssel..."
+    echo "[pi] No GPG key found — generating new Ed25519 key..."
 
     gpg --batch --gen-key <<EOF
 %no-protection
@@ -27,19 +27,15 @@ Expire-Date: 0
 %commit
 EOF
 
-    echo "[pi] GPG-Schlüssel erfolgreich erzeugt."
-else
-    echo "[pi] GPG-Schlüssel gefunden — wird wiederverwendet."
+    echo "[pi] GPG key created successfully."
 fi
 
 # password-store initialisieren falls noch nicht geschehen
 if [ ! -f "$PASSWORD_STORE_DIR/.gpg-id" ]; then
-    echo "[pi] Initialisiere password-store unter $PASSWORD_STORE_DIR ..."
+    echo "[pi] Initialising password store at $PASSWORD_STORE_DIR ..."
     GPG_ID=$(gpg --list-keys --with-colons pi@local | awk -F: '/^fpr:/{print $10; exit}')
     pass init "$GPG_ID"
-    echo "[pi] password-store initialisiert."
-else
-    echo "[pi] password-store bereits initialisiert."
+    echo "[pi] Password store initialised."
 fi
 
 exec "$@"

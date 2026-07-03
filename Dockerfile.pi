@@ -35,5 +35,5 @@ RUN mkdir -p ~/.config ~/.local ~/.cache ~/.pi
 
 WORKDIR /workdir
 
-ENTRYPOINT ["dumb-init", "--", "/usr/local/bin/entrypoint.pi.sh"]
-CMD ["pi"]
+ENTRYPOINT ["dumb-init", "--", "/usr/local/bin/entrypoint.pi.sh", "pi"]
+CMD []
