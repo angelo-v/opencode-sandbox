@@ -286,3 +286,16 @@ make uninstall-pi-bash  # or make uninstall-pi-zsh
 ### Networking
 
 The pi sandbox uses `--network=host` instead of bridge networking (unlike the OpenCode sandbox), allowing direct host network access.
+
+### Language Server Support (LSP)
+
+The pi sandbox ships [pi-lsp](https://www.npmjs.com/package/pi-lsp), giving pi post-edit diagnostics and navigation tools (`lsp_diagnostics`, `lsp_hover`, `lsp_definition`, `lsp_references`, `lsp_symbols`).
+
+On every container start the entrypoint:
+
+1. seeds `~/.pi/agent/lsp.json` **only if it does not exist** (seed-if-absent);
+2. installs the pinned pi-lsp extension into `~/.pi/agent` if not already installed (needs network on first start only). The version is pinned in one place — the `PI_LSP_VERSION` constant in `setup-lsp.nu`; upgrades happen deliberately there plus a one-time `pi install npm:pi-lsp@<version>`.
+
+The seed template is the standalone [`lsp.json`](lsp.json) file in this repository; both files are baked into the image at `/usr/local/share/pi-sandbox/`. 
+
+Since seeding only happens when the file is absent, edits made on the host survive container restarts and image updates. To reset to the image defaults, delete `~/.pi/agent/lsp.json` and restart the container.

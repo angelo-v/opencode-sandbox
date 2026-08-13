@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "servers": [
+    {
+      "id": "nu",
+      "enabled": true,
+      "include": ["**/*.nu"],
+      "rootMarkers": ["mod.nu", "env.nu", ".git"],
+      "bin": "nu",
+      "args": ["--no-config-file", "--lsp"],
+      "cwd": "{root}",
+      "languageIdByExtension": { ".nu": "nushell" },
+      "startupTimeoutMs": 120000,
+      "diagnosticsWaitMs": 1500
+    }
+  ]
+}

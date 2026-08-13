@@ -37,6 +37,7 @@ RUN apt-get update && apt-get install -y \
     && npm install -g @earendil-works/pi-coding-agent
 
 COPY --chmod=755 entrypoint.pi.sh /usr/local/bin/entrypoint.pi.sh
+COPY lsp.json setup-lsp.nu /usr/local/share/pi-sandbox/
 
 USER node
 

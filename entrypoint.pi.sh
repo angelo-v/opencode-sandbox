@@ -38,4 +38,7 @@ if [ ! -f "$PASSWORD_STORE_DIR/.gpg-id" ]; then
     echo "[pi] Password store initialised."
 fi
 
+# LSP-Setup
+nu --no-config-file /usr/local/share/pi-sandbox/setup-lsp.nu
+
 exec "$@"
