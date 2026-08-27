@@ -76,8 +76,8 @@ secrets-pi:
 	  -v $(HOME)/.pi:/home/node/.pi:rw \
 	  -e GNUPGHOME=/home/node/.pi/gnupg \
 	  -e PASSWORD_STORE_DIR=/home/node/.pi/secrets \
+	  --entrypoint bash \
 	  ghcr.io/angelo-v/pi-sandbox:latest \
-	  bash
 
 .PHONY: run build install-bash install-zsh uninstall-bash uninstall-zsh \
         build-pi run-pi secrets-pi install-pi-bash install-pi-zsh uninstall-pi-bash uninstall-pi-zsh
