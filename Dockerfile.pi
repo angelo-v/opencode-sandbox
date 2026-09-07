@@ -40,6 +40,11 @@ RUN apt-get update && apt-get install -y \
     && apt-get clean \
     && npm install -g @earendil-works/pi-coding-agent
 
+ENV PLAYWRIGHT_BROWSERS_PATH=/home/node/.pi/playwright-cache
+RUN npm install -g playwright \
+    && npx playwright install-deps chromium \
+    && rm -rf /var/lib/apt/lists/*
+
 COPY --chmod=755 entrypoint.pi.sh /usr/local/bin/entrypoint.pi.sh
 COPY lsp.json setup-lsp.nu /usr/local/share/pi-sandbox/
 
@@ -50,6 +55,8 @@ RUN pipx install uv
 RUN mkdir -p ~/.config ~/.local ~/.cache ~/.pi
 
 WORKDIR /workdir
+
+VOLUME /home/node/.pi
 
 ENTRYPOINT ["dumb-init", "--", "/usr/local/bin/entrypoint.pi.sh", "pi"]
 CMD []

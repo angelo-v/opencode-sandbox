@@ -41,4 +41,8 @@ fi
 # LSP-Setup
 nu --no-config-file /usr/local/share/pi-sandbox/setup-lsp.nu
 
+if ! playwright install chromium; then
+  echo "[pi] WARNING: Playwright browser setup failed — browser automation unavailable"
+fi
+
 exec "$@"
