@@ -42,7 +42,7 @@ RUN apt-get update && apt-get install -y \
 
 ENV PLAYWRIGHT_BROWSERS_PATH=/home/node/.pi/playwright-cache
 RUN npm install -g playwright \
-    && npx playwright install-deps chromium \
+    && npx playwright install-deps chromium firefox \
     && rm -rf /var/lib/apt/lists/*
 
 COPY --chmod=755 entrypoint.pi.sh /usr/local/bin/entrypoint.pi.sh
