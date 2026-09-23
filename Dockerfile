@@ -7,7 +7,7 @@ RUN apt-get update && apt-get install -y \
     jq \
     && rm -rf /var/lib/apt/lists/* \
     && apt-get clean \
-    && npm install -g opencode-ai
+    && npm install -g @opencode/cli
 
 # Install playwright-cli with chrome browser
 RUN  npm install -g @playwright/cli \
@@ -26,4 +26,4 @@ RUN mkdir -p ~/.config ~/.local ~/.cache
 WORKDIR /workspace
 
 ENTRYPOINT ["dumb-init", "--"]
-CMD ["opencode"]
+CMD ["opencode", "--standalone"]
